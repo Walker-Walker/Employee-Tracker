@@ -1,0 +1,12 @@
+var inquirer = require('inquirer');
+const connection = require('./db/database');
+
+
+connection.query(`SELECT * FROM employee`, [], (err, rows) => {
+  if (err) {
+    console.log(err)
+    return;
+  }
+
+console.log(rows)
+});
