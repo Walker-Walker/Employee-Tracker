@@ -13,21 +13,21 @@ VALUES
   
 INSERT INTO department (id, name )
 VALUES 
-(1, Engineering),
-(2, Sales),
-(3, Finance),
-(4, Legal),
-(5, Office);
+(1, 'Engineering'),
+(2, 'Sales'),
+(3, 'Finance'),
+(4, 'Legal'),
+(5, 'Office');
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES 
-(1, Alex, Walker, 1, 2),
-(2, Rocky, Balboa, 2, null),
-(3, Lando, Calrissian, 3, null),
-(4, Han, Solo, 4, 3),
-(5, Travis, Bickle, 5, 3),
-(6, Bruce, Wayne, 6, 2),
-(7, Worf, Maximillion, 7, null),
-(8, Ellen, Riply, 8, 9),
-(9, Amanda, Riply, 9, null),
-(10, Sam, Shankle, 10, null);
+(1, 'Alex', 'Walker', 1, 2),
+(2, 'Rocky', 'Balboa', 2, null),
+(3, 'Lando', 'Calrissian', 3, null),
+(4, 'Han', 'Solo', 4, 3),
+(5, 'Travis', 'Bickle', 5, 3),
+(6, 'Bruce', 'Wayne', 6, 2),
+(7, 'Worf', 'Maximillion', 7, null),
+(8, 'Ellen', 'Riply', 8, 9),
+(9, 'Amanda', 'Riply', 9, null),
+(10, 'Sam', 'Shankle', 10, null);
