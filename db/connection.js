@@ -4,18 +4,26 @@ class lib {
 // connection querys for user selections to 
 selectAllDepartments () {
     // your code here 
-    //log the data into the terminal 
+    connection.query(`SELECT * FROM department`, [] ,(err, rows) => {
+      if(err){
+        console.log(err)
+        return;
+      }//log the data into the terminal 
+      console.table(rows);
+      
+    } )
+    
 }
 
 }
 
-connection.query(`SELECT * FROM employee`, [], (err, rows) => {
-  if (err) {
-    console.log(err)
-    return;
-  }
+// connection.query(`SELECT * FROM employee`, [], (err, rows) => {
+//   if (err) {
+//     console.log(err)
+//     return;
+//   }
 
-console.log(rows)
-});
+// console.log(rows)
+// });
 
-module.exports = lib;
+module.exports = new lib;

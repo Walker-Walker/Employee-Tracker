@@ -1,5 +1,6 @@
 var inquirer = require("inquirer");
-const connection = require("./db/connection");
+const cTable = require('console.table');
+const lib = require('./db/connection');
 const promptUser = () => {
   return inquirer
     .prompt([
@@ -44,11 +45,12 @@ const promptUser = () => {
       },
     ])
     .then((answers) => {
-      console.log(answers.name);
+      // console.log(answers.name);
       //where you will run other functions calls/methods to employee data//sql querys
+    
       switch (answers.name) {
         case "view_all_departments":
-          return //function call  ;
+          return selectAllDepts();//function call;
           
         case "view_all_roles":
           return; // function call ;
@@ -82,7 +84,8 @@ const promptUser = () => {
 // list function declarations are function calls for connection js  for above function calls in switch case 
 function selectAllDepts () {
   //display this through terminal lib.selectAllDepartments()
-  
+  lib.selectAllDepartments()
+
 }
 
 promptUser();
