@@ -9,6 +9,7 @@ class lib {
         console.log(err);
         return;
       } //log the data into the terminal
+      console.log("");
       console.table(rows);
     });
   }
@@ -18,6 +19,7 @@ class lib {
         console.log(err);
         return;
       }
+      console.log("");
       console.table(rows);
     });
   }
@@ -27,6 +29,7 @@ class lib {
         console.log(err);
         return;
       }
+      console.log("");
       console.table(rows);
     });
   }
