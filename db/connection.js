@@ -33,7 +33,13 @@ class lib {
       console.table(rows);
     });
   }
-  addDepartment() {
+  addDepartment(department) {
+    connection.query(`INSERT INTO department (name) VALUES (?)`,[department], (err, rows) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+    } )
     
   }
 }
