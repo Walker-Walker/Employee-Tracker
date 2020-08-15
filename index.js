@@ -1,13 +1,13 @@
 var inquirer = require("inquirer");
 const cTable = require("console.table");
-const lib = require("./db/connection");
+const lib = require("./db/database");
 const {
   viewAllDepartments,
   viewAllRoles,
   viewAllEmployees,
   addDepartment,
   addRole,
-} = require("./db/connection");
+} = require("./db/database");
 
 const promptUser = () => {
   return inquirer
@@ -75,20 +75,7 @@ const promptUser = () => {
         return answers.mainPrompt == "add_a_role" ? true : false;
       }
     },
-    {
-      name: "choose_a_role_department",
-      type: "list",
-      message: "Choose a Department",
-      choices: [
-        {
-          name: "department",
-          value: "department.name"
-        }
-      ]
-      // when: (answers) => {
-      //   return answers.mainPrompt == //// insert boolean condition here; 
-      // }
-    },
+   
     ])
     .then((answers) => {
       console.log(answers.mainPrompt);
