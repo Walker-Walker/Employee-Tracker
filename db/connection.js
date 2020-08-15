@@ -4,7 +4,7 @@ class lib {
   // connection querys for user selections to
   viewAllDepartments() {
     // your code here
-    connection.query(`SELECT * FROM department`, [], (err, rows) => {
+    connection.query(`SELECT id, name FROM department`, [], (err, rows) => {
       if (err) {
         console.log(err);
         return;
@@ -14,7 +14,7 @@ class lib {
     });
   }
   viewAllRoles() {
-    connection.query(`SELECT * FROM role`, [], (err, rows) => {
+    connection.query(`SELECT title, department.id, department.name,   role.id, salary FROM role JOIN department ON (role.department_id = department.id)`, [], (err, rows) => {
       if (err) {
         console.log(err);
         return;
@@ -24,7 +24,7 @@ class lib {
     });
   }
   viewAllEmployees() {
-    connection.query(`SELECT * FROM employee`, [], (err, rows) => {
+    connection.query(`SELECT * FROM employee JOIN role ON (employee.role_id = role.id) JOIN department ON (role.department_id = department.id)`, [], (err, rows) => {
       if (err) {
         console.log(err);
         return;
@@ -41,6 +41,14 @@ class lib {
         }
     } )
     
+  }
+  addRole(title, salary){
+    connection.query(`INSERT INTO role (title, salary) VALUES(?, ?)`,[title, salary], (err, rows) => {
+      if(err) {
+        console.log(err);
+        return;
+      }
+    })
   }
 }
 

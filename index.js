@@ -1,14 +1,20 @@
 var inquirer = require("inquirer");
 const cTable = require("console.table");
 const lib = require("./db/connection");
-const { viewAllDepartments, viewAllRoles, viewAllEmployees, addDepartment } = require("./db/connection");
+const {
+  viewAllDepartments,
+  viewAllRoles,
+  viewAllEmployees,
+  addDepartment,
+  addRole,
+} = require("./db/connection");
 
 const promptUser = () => {
   return inquirer
     .prompt([
       {
         type: "list",
-        name: "name",
+        name: "mainPrompt",
         message: "Please choose one of the following ",
         choices: [
           {
@@ -46,19 +52,49 @@ const promptUser = () => {
         ],
       },
       {
-        name:"add_a_department",
-        type:"input",
-        message:"Enter name of Department",
+        name: "add_a_department",
+        type: "input",
+        message: "Enter name of Department",
         when: (answers) => {
-          return(answers.name == "add_a_department" ? true : false );
-        }
+          return answers.mainPrompt == "add_a_department" ? true : false;
+        },
+      },
+      {
+        name: "add_a_role_title",
+        type: "input",
+        message: "Enter name of Role",
+        when: (answers) => {
+          return answers.mainPrompt == "add_a_role" ? true : false;
+        },
+      },
+      {
+      name: "add_a_role_salary",
+      type: "input",
+      message: "Enter Salary",
+      when: (answers) => {
+        return answers.mainPrompt == "add_a_role" ? true : false;
       }
+    },
+    {
+      name: "choose_a_role_department",
+      type: "list",
+      message: "Choose a Department",
+      choices: [
+        {
+          name: "department",
+          value: "department.name"
+        }
+      ]
+      // when: (answers) => {
+      //   return answers.mainPrompt == //// insert boolean condition here; 
+      // }
+    },
     ])
     .then((answers) => {
-      console.log(answers.name);
+      console.log(answers.mainPrompt);
       //where you will run other functions calls/methods to employee data//sql querys
       console.log(answers);
-      switch (answers.name) {
+      switch (answers.mainPrompt) {
         case "view_all_departments":
           return viewAllDepartments(), promptUser(); //function call;
 
@@ -72,7 +108,7 @@ const promptUser = () => {
           return addDepartment(answers.add_a_department), promptUser(); // function call;
 
         case "add_a_role":
-          return; //function call;
+          return addRole(answers.add_a_role_title, answers.add_a_role_salary), promptUser();
 
         case "add_an_employee":
           return; //function call;
@@ -91,26 +127,25 @@ const promptUser = () => {
     });
 };
 //opens another inquirer prompt for inputing department name, calling addDeparment with name inserted as an argument?
-const addDepartmentPrompt = () => {
-  return inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "Enter name of Department",
-      },
-    ])
-    .then((answers) => {
-      console.log(answers);
-    })
-    .catch((err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-};
+// const addDepartmentPrompt = () => {
+//   return inquirer
+//     .prompt([
+//       {
+//         type: "input",
+//         name: "name",
+//         message: "Enter name of Department",
+//       },
+//     ])
+//     .then((answers) => {
+//       console.log(answers);
+//     })
+//     .catch((err) => {
+//       if (err) {
+//         console.log(err);
+//       }
+//     });
+// };
 // list function declarations are function calls for connection js  for above function calls in switch case
-
 
 promptUser();
 // SELECT * FROM employee

@@ -4,7 +4,7 @@ VALUES
     (2,'Lead Engineer', 150000, 1),
     (3,'Sales Lead', 90000, 2),
     (4,'Salesperson', 70000, 2),
-    (5,'Salesperson', 65000, 2),
+    (5,'Salesperson', 70000, 2),
     (6,'Software Engineer', 90000, 1),
     (7,'Accountant', 80000, 3),
     (8,'Lawyer', 110000, 4),
