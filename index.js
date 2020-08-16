@@ -1,13 +1,14 @@
 var inquirer = require("inquirer");
 const cTable = require("console.table");
 const lib = require("./db/database");
-const {
-  viewAllDepartments,
-  viewAllRoles,
-  viewAllEmployees,
-  addDepartment,
-  addRole,
-} = require("./db/database");
+// const {
+//   viewAllDepartments,
+//   viewAllRoles,
+//   viewAllEmployees,
+//   addDepartment,
+//   addRole,
+//   addEmployee,
+// } = require("./db/database");
 
 const promptUser = () => {
   return inquirer
@@ -75,7 +76,48 @@ const promptUser = () => {
         return answers.mainPrompt == "add_a_role" ? true : false;
       }
     },
-   
+  
+    // {
+    //   name: "add_a_role_department_id",
+    //   type: "input",
+    //   message: "Enter department id",
+    //   when: (answers) => {
+    //     return answers.mainPrompt == "add_a_role" ? true: false;
+    //   }
+    // },
+    {
+      name: 'add_an_employee_first_name',
+      type: 'input',
+      message: "Enter employee's first name",
+      when: (answers) => {
+        return answers.mainPrompt == "add_an_employee" ? true: false;
+      }
+    },
+    {
+      name: 'add_an_employee_last_name',
+      type: 'input',
+      message: "Enter employee's last name",
+      when: (answers) => {
+        return answers.mainPrompt == "add_an_employee" ? true: false;
+      }
+    },
+    {
+      name:'add_employee_manager_id',
+      type: 'input',
+      message: "Enter employee's manager id",
+      when: (answers) => {
+        return answers.mainPrompt == "add_an_employee" ? true: false;
+
+      }
+    },
+    {
+      name: 'add_employee_role_id',
+      type: 'input',
+      message: "Enter employee's role id",
+      when: (answers) => {
+        return answers.mainPrompt == "add_an_employee" ? true: false;
+      }
+    }
     ])
     .then((answers) => {
       console.log(answers.mainPrompt);
@@ -83,29 +125,31 @@ const promptUser = () => {
       console.log(answers);
       switch (answers.mainPrompt) {
         case "view_all_departments":
-          return viewAllDepartments(), promptUser(); //function call;
+          return viewDepartments() 
 
         case "view_all_roles":
-          return viewAllRoles(), promptUser(); // function call ;
+          return viewRoles()
 
         case "view_all_employees":
-          return viewAllEmployees(), promptUser(); //function call ;
+          return viewEmployees() //function call ;
 
         case "add_a_department":
-          return addDepartment(answers.add_a_department), promptUser(); // function call;
+          return addADepartment(answers.add_a_department) // function call;
 
         case "add_a_role":
-          return addRole(answers.add_a_role_title, answers.add_a_role_salary), promptUser();
+          return addRole(answers.add_a_role_title, answers.add_a_role_salary,answers.add_a_role_department_id), promptUser();
 
         case "add_an_employee":
-          return; //function call;
+          return addEmployee(answers.add_an_employee_first_name, answers.add_an_employee_last_name, answers.add_employee_manager_id, answers.add_employee_role_id ), promptUser();//function call;
 
         case "update_an_employee_role":
           return; //function call;
 
         case "exit":
-          return exit();
+          return endProgram();
       }
+    }).then(() => {
+      promptUser();
     })
     .catch((error) => {
       if (error) {
@@ -113,6 +157,34 @@ const promptUser = () => {
       }
     });
 };
+
+function viewDepartments () {
+  lib.viewAllDepartments().then(([rows]) =>  {
+    console.log("");  
+    console.table(rows);
+  })
+}
+function viewRoles() {
+  lib.viewAllRoles().then(([rows]) => {
+    console.log("");
+    console.table(rows);
+  }) 
+}
+
+function viewEmployees() {
+  lib.viewAllEmployees().then(([rows]) => {
+    console.log("");
+    console.table(rows);
+  })
+}
+
+function addADepartment() {
+  lib.addDepartment();
+}
+
+function endProgram() {
+  console.log(" Press Control C to end Program");
+}
 //opens another inquirer prompt for inputing department name, calling addDeparment with name inserted as an argument?
 // const addDepartmentPrompt = () => {
 //   return inquirer
