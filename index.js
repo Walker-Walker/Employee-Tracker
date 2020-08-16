@@ -120,9 +120,9 @@ const promptUser = () => {
     }
     ])
     .then((answers) => {
-      console.log(answers.mainPrompt);
+      // console.log(answers.mainPrompt);
       //where you will run other functions calls/methods to employee data//sql querys
-      console.log(answers);
+      // console.log(answers);
       switch (answers.mainPrompt) {
         case "view_all_departments":
           return viewDepartments() 
