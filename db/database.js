@@ -53,24 +53,24 @@ class Lib {
     return this.connection.promise().query(`SELECT * FROM employee JOIN role ON (employee.role_id = role.id) JOIN department ON (role.department_id = department.id)`)
   }
   addDepartment(department) {
-    // connection.query(
-    //   `INSERT INTO department (name) VALUES (?)`,
-    //   [department],
-    //   (err, rows) => {
-    //     if (err) {
-    //       console.log(err);
-    //       return;
-    //     }
-    //   }
-    // );
+    connection.query(
+      `INSERT INTO department (name) VALUES (?)`,
+      [department],
+      (err, rows) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+      }
+    );
 
-    return this.connection.promise().query(`INSERT INTO department (name) VALUES ( ? )`)
+    // return this.connection.promise().query(`INSERT INTO department (name) VALUES ( ? )`)
   }
 
   addRole(title, salary, department_id) {
     console.log("title: " + title, "salary: " + salary);
-    // let idNumber = Math.floor(Math.random()*1000);
-    // //grab all departments and store them into a variable...
+    let idNumber = Math.floor(Math.random()*1000);
+    //grab all departments and store them into a variable...
     // viewAllDepartments().then((rows) => {
     //   console.table(rows);
     // })

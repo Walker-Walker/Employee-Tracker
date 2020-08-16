@@ -77,14 +77,14 @@ const promptUser = () => {
       }
     },
   
-    // {
-    //   name: "add_a_role_department_id",
-    //   type: "input",
-    //   message: "Enter department id",
-    //   when: (answers) => {
-    //     return answers.mainPrompt == "add_a_role" ? true: false;
-    //   }
-    // },
+    {
+      name: "add_a_role_department_id",
+      type: "input",
+      message: "Enter department id",
+      when: (answers) => {
+        return answers.mainPrompt == "add_a_role" ? true: false;
+      }
+    },
     {
       name: 'add_an_employee_first_name',
       type: 'input',
@@ -137,10 +137,10 @@ const promptUser = () => {
           return addADepartment(answers.add_a_department) // function call;
 
         case "add_a_role":
-          return addRole(answers.add_a_role_title, answers.add_a_role_salary,answers.add_a_role_department_id), promptUser();
+          return lib.addRole(answers.add_a_role_title, answers.add_a_role_salary,answers.add_a_role_department_id), promptUser();
 
         case "add_an_employee":
-          return addEmployee(answers.add_an_employee_first_name, answers.add_an_employee_last_name, answers.add_employee_manager_id, answers.add_employee_role_id ), promptUser();//function call;
+          return lib.addEmployee(answers.add_an_employee_first_name, answers.add_an_employee_last_name, answers.add_employee_manager_id, answers.add_employee_role_id ), promptUser();//function call;
 
         case "update_an_employee_role":
           return; //function call;
@@ -178,8 +178,8 @@ function viewEmployees() {
   })
 }
 
-function addADepartment() {
-  lib.addDepartment();
+function addADepartment(rows) {
+  lib.addDepartment(rows);
 }
 
 function endProgram() {
